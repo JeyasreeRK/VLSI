@@ -1,4 +1,4 @@
- halfadder
+ //halfadder
 
 module halfadder(
     input a,b,
