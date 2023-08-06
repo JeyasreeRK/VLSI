@@ -1,0 +1,52 @@
+module fsm_4(
+    input val1,val2,clk,rst,
+    output reg out
+    );
+parameter S0 = 2'b00;
+parameter S1 = 2'b01;
+parameter S2 = 2'b10;
+parameter S3 = 2'b11;
+reg [1:0]p_s,n_s;
+
+always @(posedge clk or posedge rst)
+begin
+if(rst) p_s = S0;
+else
+begin
+case({p_s})
+S0 : 
+begin
+out = 1'b0;
+if(val1 && !val2) n_s = S0 ;
+else if(!val1 && val2)n_s = S1;
+end
+S1 : 
+begin
+out = 1'b0;
+if(!val1 && !val2) n_s = S1;
+else if(val1 && val2) n_s = S2;
+end
+S2 : 
+begin
+out = 1'b1;
+if(val1) n_s = S0;
+else if(!val1 && !val2) n_s = S2;
+else if(!val1 &&val2) n_s = S3;
+end
+S3 : 
+begin
+out = 1'b0;
+if(val1 && !val2) n_s = S2;
+else if(!val1 && val2) n_s = S3;
+end
+default :
+begin
+out = 1'b0;
+end
+endcase
+p_s = n_s;
+end
+end
+
+
+endmodule
