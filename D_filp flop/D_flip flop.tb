@@ -1,0 +1,29 @@
+module dflip;
+
+	// Inputs
+	reg d;
+	reg clk;
+
+	// Outputs
+	wire out;
+
+	// Instantiate the Unit Under Test (UUT)
+	dfilpflop uut (
+		.d(d), 
+		.clk(clk), 
+		.out(out)
+	);
+    always #100 clk = ~clk; 
+	initial begin
+		// Initialize Inputs
+	 clk <= 0;  d <= 0;  
+		  #100   d <= 1; 
+		  #100   d <= 0; 	
+		  #100   d <= 1; 	
+
+		// Wait 100 ns for global reset to finish
+		// Add stimulus here
+
+	end
+      
+endmodule
