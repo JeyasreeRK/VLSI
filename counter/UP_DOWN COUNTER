@@ -1,0 +1,20 @@
+module updo(
+    input clk,rst,up_do,
+    output  [3:0] c
+    );
+reg [3:0] up_down;
+
+// down counter
+always @(posedge clk or posedge rst)
+begin
+if(rst)
+up_down <= 4'h0;
+else if(~up_down)
+ up_down <= up_down + 4'd1;
+else
+ up_down <= up_down - 4'd1;
+end 
+assign c = up_down;
+
+
+endmodule
