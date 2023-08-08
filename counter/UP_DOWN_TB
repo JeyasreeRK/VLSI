@@ -1,0 +1,30 @@
+module ud_tb;
+
+	// Inputs
+	reg clk;
+	reg rst;
+	reg up_do;
+
+	// Outputs
+	wire [3:0] c;
+
+	// Instantiate the Unit Under Test (UUT)
+	updo uut (
+		.clk(clk), 
+		.rst(rst), 
+		.up_do(up_do), 
+		.c(c)
+	);
+
+	initial begin
+		// Initialize Inputs
+		 clk=0;
+      forever #5 clk=~clk;
+   end
+   initial begin
+     rst=1;
+     up_do=0;
+     #20 rst=0;
+     #200 up_do=1;
+  end
+endmodule
